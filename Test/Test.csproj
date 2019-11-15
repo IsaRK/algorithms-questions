@@ -14,7 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GFGTests\GFGTests.csproj" />
+    <ProjectReference Include="..\Algo\AlgorithmsQuestions.csproj" />
+    <ProjectReference Include="..\GFGTests\AlgorithmsQuestions.csproj" />
   </ItemGroup>
 
 </Project>

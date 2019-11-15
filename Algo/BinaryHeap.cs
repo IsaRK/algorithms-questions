@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GFGTests
+namespace Algorithms
 {
     //Min Heap : https://egorikas.com/max-and-min-heap-implementation-with-csharp/
     public class BinaryHeap

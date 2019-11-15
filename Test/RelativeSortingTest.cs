@@ -1,7 +1,4 @@
-﻿using GFGTests;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Algorithms;
 using Xunit;
 
 namespace Test

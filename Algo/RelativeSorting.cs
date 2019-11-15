@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GFGTests
+namespace Algorithms
 {
     public static class RelativeSorting
     {

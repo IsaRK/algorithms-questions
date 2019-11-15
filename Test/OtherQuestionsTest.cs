@@ -1,18 +1,16 @@
-﻿using GFGTests;
-using System;
-using System.Collections.Generic;
+﻿using Algorithms;
 using System.Diagnostics;
 using System.Text;
 using Xunit;
 
 namespace Test
 {
-    public static class QuestionsFabienTest
+    public static class OtherQuestionsTest
     {
         [Fact]
         public static void StackFromQueueTest()
         {
-            var maStack = new QuestionsFabien.StackFromQueue();
+            var maStack = new OtherQuestions.StackFromQueue();
 
             maStack.Push(1);
             maStack.Push(2);
@@ -26,13 +24,13 @@ namespace Test
         {
             var watch = new Stopwatch();
             watch.Start();
-            Assert.Equal(89, QuestionsFabien.Fib(11));
+            Assert.Equal(89, OtherQuestions.Fib(11));
             watch.Stop();
             Trace.WriteLine(watch.ElapsedMilliseconds);
 
             watch.Reset();
             watch.Start();
-            Assert.Equal(89, QuestionsFabien.FibRec(11));
+            Assert.Equal(89, OtherQuestions.FibRec(11));
             watch.Stop();
             Trace.WriteLine(watch.ElapsedMilliseconds);
         }
@@ -46,7 +44,7 @@ namespace Test
         [InlineData(new int[] { 7, 8, 6, 9,6, 2 }, new int[] { 2, 3, 3 })]
         public static void HistoriqueMarcheTest(int[] input, int[] expected)
         {
-            Assert.Equal(expected, QuestionsFabien.HistoriqueMarche(input));
+            Assert.Equal(expected, OtherQuestions.HistoriqueMarche(input));
         }
     }
 }

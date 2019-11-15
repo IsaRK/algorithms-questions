@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GFGTests
+namespace Algorithms
 {
-    public static class QuestionsFabien
+    public static class OtherQuestions
     {
         //Faire une stack à partir de queues
         public class StackFromQueue

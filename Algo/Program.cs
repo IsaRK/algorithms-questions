@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GFGTests
+namespace Algorithms
 {
     public class Program
     {

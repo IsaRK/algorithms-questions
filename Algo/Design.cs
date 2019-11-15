@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GFGTests
+namespace Algorithms
 {
     /**
          * Your Twitter object will be instantiated and called as such:
