@@ -36,5 +36,35 @@ namespace Algorithms
 
             result.Add(node.val);
         }
+
+        public static bool IsSameTree(TreeNode p, TreeNode q)
+        {
+            string PrintInOrder(TreeNode node, StringBuilder sb)
+            {
+                if (node == null)
+                {
+                    return "";
+                }
+
+                if (node.left == null && node.right != null)
+                {
+                    sb.Append("null");
+                }
+
+                PrintInOrder(node.left, sb);
+                sb.Append(node.val);
+
+                if (node.right == null && node.left != null)
+                {
+                    sb.Append("null");
+                }
+
+                PrintInOrder(node.right, sb);
+
+                return sb.ToString();
+            }
+
+            return PrintInOrder(p, new StringBuilder()) == PrintInOrder(q, new StringBuilder());
+        }
     }
 }

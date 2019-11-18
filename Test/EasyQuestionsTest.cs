@@ -21,6 +21,27 @@ namespace Test
             Assert.Equal(3, EasyQuestions.ClimbStairs(3));
         }
 
-        
+        [Fact]
+        public static void IsPowerOfTwoTest()
+        {
+            Assert.True(EasyQuestions.IsPowerOfTwo(1));
+            Assert.True(EasyQuestions.IsPowerOfTwo(16));
+            Assert.False(EasyQuestions.IsPowerOfTwo(18));
+        }
+
+        [Fact]
+        public static void RobTest()
+        {
+            Assert.Equal(4, EasyQuestions.Rob(new int[] { 2, 1, 1, 2}));
+        }
+
+        [Theory]
+        [InlineData(new int[] { 1, 2, 3, 1 }, 4)]
+        [InlineData(new int[] { 1, 2, 1, 1 }, 3)]
+        public static void RobTest2(int[] input, int expected)
+        {
+            Assert.Equal(expected, EasyQuestions.Rob2(input));
+        }
+
     }
 }

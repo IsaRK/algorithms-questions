@@ -100,5 +100,71 @@ namespace Test
             twitter.Unfollow(1, 2);
             Assert.Equal(new List<int> { 222, 204, 200, 201, 205, 11, 333, 94, 2, 101 }, twitter.GetNewsFeed(1));
         }
+
+        [Fact]
+        public void MinStackTest()
+        {
+            MinStack minStack = new MinStack();
+            minStack.Push(-2);
+            minStack.Push(0);
+            minStack.Push(-3);
+            Assert.Equal(-3, minStack.GetMin());
+            minStack.Pop();
+            Assert.Equal(0, minStack.Top());
+            Assert.Equal(-2, minStack.GetMin());
+        }
+
+        [Fact]
+        public void RandomizedSetTest()
+        {
+            RandomizedSet randomSet = new RandomizedSet();
+            Assert.True(randomSet.Insert(1));
+            Assert.False(randomSet.Remove(2));
+            Assert.True(randomSet.Insert(2));
+            randomSet.GetRandom();
+            Assert.True(randomSet.Remove(1));
+            Assert.False(randomSet.Insert(2));
+            Assert.Equal(2, randomSet.GetRandom());
+        }
+
+        [Fact]
+        public void RandomizedSetTest2()
+        {
+            RandomizedSet randomSet = new RandomizedSet();
+            Assert.True(randomSet.Insert(0));
+            Assert.True(randomSet.Insert(1));
+            Assert.True(randomSet.Remove(0));
+            Assert.True(randomSet.Insert(2));
+            Assert.True(randomSet.Remove(1));
+            Assert.Equal(2, randomSet.GetRandom());
+        }
+
+        [Fact]
+        public void RandomizedSetTest3()
+        {
+            RandomizedSet randomSet = new RandomizedSet();
+            Assert.False(randomSet.Remove(0));
+            Assert.False(randomSet.Remove(0));
+            Assert.True(randomSet.Insert(0));
+            Assert.Equal(0, randomSet.GetRandom());
+            Assert.True(randomSet.Remove(0));
+            Assert.True(randomSet.Insert(0));
+        }
+
+        [Fact]
+        public void RandomizedSetTest4()
+        {
+            RandomizedSet randomSet = new RandomizedSet();
+            Assert.True(randomSet.Insert(3));
+            Assert.False(randomSet.Insert(3));
+            Assert.Equal(3, randomSet.GetRandom());
+            Assert.Equal(3, randomSet.GetRandom());
+            Assert.True(randomSet.Insert(1));
+            Assert.True(randomSet.Remove(3));
+            Assert.Equal(1, randomSet.GetRandom());
+            Assert.Equal(1, randomSet.GetRandom());
+            Assert.True(randomSet.Insert(0));
+            Assert.True(randomSet.Remove(0));
+        }
     }
 }

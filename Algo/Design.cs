@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -119,6 +120,139 @@ namespace Algorithms
             }
         }
     }
+
+    public class MinStack
+    {
+        /**
+     * Your MinStack object will be instantiated and called as such:
+     * MinStack obj = new MinStack();
+     * obj.Push(x);
+     * obj.Pop();
+     * int param_3 = obj.Top();
+     * int param_4 = obj.GetMin();
+     */
+        private Stack<int[]> _stack;
+        private int _min;
+
+        /** initialize your data structure here. */
+        public MinStack()
+        {
+            _stack = new Stack<int[]>();
+            _min = int.MaxValue;
+        }
+
+        public void Push(int x)
+        {
+            if (x < _min)
+            {
+                _min = x;
+            }
+
+            _stack.Push(new int[] { x, _min}); 
+        }
+
+        public void Pop()
+        {
+            if (_stack.Count > 0)
+            {
+                _stack.Pop();
+            }
+
+            if (_stack.Count > 0)
+            {
+                _min = _stack.Peek()[1];
+            }
+            else
+            {
+                _min = int.MaxValue;
+            }
+                
+        }
+
+        public int Top()
+        {
+            return _stack.Peek()[0];
+        }
+
+        public int GetMin()
+        {
+            return _min;
+        }
+    }
+
+    /**
+     * Your RandomizedSet object will be instantiated and called as such:
+     * RandomizedSet obj = new RandomizedSet();
+     * bool param_1 = obj.Insert(val);
+     * bool param_2 = obj.Remove(val);
+     * int param_3 = obj.GetRandom();
+     */
+
+    public class RandomizedSet
+    {
+        private List<int> set;
+        private Dictionary<int, int> _valuesToIndex;
+
+
+        /** Initialize your data structure here. */
+        public RandomizedSet()
+        {
+            set = new List<int>();
+            _valuesToIndex = new Dictionary<int, int>();
+        }
+
+        /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
+        public bool Insert(int val)
+        {
+            if (_valuesToIndex.ContainsKey(val))
+            {
+                return false;
+            }
+
+            set.Add(val);
+            _valuesToIndex.Add(val, set.Count - 1);
+            return true;
+        }
+
+        /** Removes a value from the set. Returns true if the set contained the specified element. */
+        public bool Remove(int val)
+        {
+            if (!_valuesToIndex.ContainsKey(val))
+            {
+                return false;
+            }
+
+            if (set.Count == 1)
+            {
+                _valuesToIndex.Clear();
+                set.Clear();
+                return true;
+            }
+
+            var indexToSwap = _valuesToIndex[val];
+
+            if (indexToSwap == set.Count - 1)
+            {
+                set.RemoveAt(set.Count - 1);
+            }
+            else
+            {
+                set[indexToSwap] = set[set.Count - 1];
+                set.RemoveAt(set.Count - 1);
+                _valuesToIndex[set[indexToSwap]] = indexToSwap;
+            }
+
+            _valuesToIndex.Remove(val);
+            return true;
+        }
+
+        /** Get a random element from the set. */
+        public int GetRandom()
+        {
+            var rand = new Random();
+            return set[rand.Next(0, set.Count - 1)];
+        }
+    }
 }
 
-        
+
