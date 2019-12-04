@@ -43,5 +43,18 @@ namespace Test
             Assert.Equal(expected, EasyQuestions.Rob2(input));
         }
 
+        [Theory]
+        [InlineData("a1b2")]
+        public static void LetterCasePermutation(string input)
+        {
+            Assert.NotNull(EasyQuestions.LetterCasePermutation(input));
+        }
+
+        [Fact]
+        public static void MySqrtTest()
+        {
+            Assert.Equal(2, EasyQuestions.MySqrt(8));
+        }
+
     }
 }

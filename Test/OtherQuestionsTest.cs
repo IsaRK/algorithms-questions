@@ -1,4 +1,5 @@
 ﻿using Algorithms;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using Xunit;
@@ -46,5 +47,39 @@ namespace Test
         {
             Assert.Equal(expected, OtherQuestions.HistoriqueMarche(input));
         }
+
+        [Fact]
+        public static void fizzBuzzTest()
+        {
+            OtherQuestions.fizzBuzz(15);
+        }
+
+        [Fact]
+        public static void betterCompressionTest()
+        {
+            Assert.Equal("a3b2c10", OtherQuestions.betterCompression("a3c9b2c1"));
+            Assert.Equal("a351z211", OtherQuestions.betterCompression("z210a350z1a1"));
+            Assert.Equal("a10", OtherQuestions.betterCompression("a10"));
+        }
+
+        [Fact]
+        public static void countPermsTest()
+        {
+            Assert.Equal(5, OtherQuestions.countPerms(1));
+            Assert.Equal(10, OtherQuestions.countPerms(2));
+            Assert.Equal(19, OtherQuestions.countPerms(3));
+            Assert.True(OtherQuestions.countPerms(99999) > 0);
+        }
+
+        [Fact]
+        public static void PoidMaxTest()
+        {
+            Assert.Equal(1250, OtherQuestions.PoidMax(new List<List<int>> { new List<int> { 1000, 50 }, new List<int> { 600, 40 } },
+                new List<List<int>> { new List<int> { 20, 40 }, new List<int> { 15, 80 } },
+                100));
+        }
+
+        
+
     }
 }

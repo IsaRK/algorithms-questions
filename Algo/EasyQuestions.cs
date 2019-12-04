@@ -166,5 +166,42 @@ namespace Algorithms
             return Math.Max(RobRec(nums.Take(nums.Length - 1).ToArray()), RobRec(nums.Skip(1).Take(nums.Length - 1).ToArray()));
         }
 
+        //https://leetcode.com/problems/letter-case-permutation/
+        public static IList<string> LetterCasePermutation(string S)
+        {
+            var result = new List<string>();
+            var tmpResult = new char[S.Length];
+
+            void LetterCaseRec(int index)
+            {
+                if (index > S.Length - 1)
+                {
+                    result.Add(new string(String.Join(null, tmpResult)));
+                    return;
+                }
+
+                tmpResult[index] = char.Parse(S[index].ToString().ToLower());
+                LetterCaseRec(index + 1);
+
+                if (int.TryParse(tmpResult[index].ToString(), out int digit))
+                {
+                    return;
+                }
+
+                tmpResult[index] = char.Parse(S[index].ToString().ToUpper());
+                LetterCaseRec(index + 1);
+            }
+
+            LetterCaseRec(0);
+
+            return result;
+        }
+
+        public static int MySqrt(int x)
+        {
+            var decimalSqrt = Math.Sqrt(x);
+
+            return (int)Math.Floor(decimalSqrt);
+        }
     }
 }

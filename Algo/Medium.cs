@@ -291,5 +291,162 @@ namespace Algorithms
                 nums.Insert(i, tmpInt);
             }
         }
+
+        //https://leetcode.com/problems/combinations/
+        public static IList<IList<int>> Combine(int n, int k)
+        {
+            var result = new List<IList<int>>();
+
+            var usedInt = new HashSet<int>();
+            var tmpResult = new int[k];
+
+            void CombineHelper(int indexK, int start)
+            {
+                if (indexK == k)
+                {
+                    result.Add(new List<int>(tmpResult));
+                    return;
+                }
+
+                for(var i = start; i <= n; i++)
+                {
+                    if (!usedInt.Contains(i))
+                    {
+                        tmpResult[indexK] = i;
+                        usedInt.Add(i);
+                        CombineHelper(indexK + 1, i + 1);
+
+                        usedInt.Remove(i);
+                    }
+                }
+            }
+
+            CombineHelper(0, 1);
+
+            return result;
+        }
+
+        //Too tricky
+        /*
+        public static IList<IList<int>> Subsets(int[] nums)
+        {
+            List<IList<int>> result = new List<IList<int>>();
+            result.Add(new List<int>());
+            Array.Sort(nums);
+            for (int i = 0; i < nums.Length; i++)
+            {
+                List<IList<int>> newResult = new List<IList<int>>();
+                foreach (var r in result)
+                {
+                    List<int> nr = new List<int>(r);
+                    nr.Add(nums[i]);
+                    newResult.Add(nr);
+                }
+                result.AddRange(newResult);
+            }
+            return result;
+        }
+        */
+
+        //More my style
+        public static IList<IList<int>> Subsets(int[] nums)
+        {
+            var result = new List<IList<int>>();
+
+            void SubsetsRec(int start, IList<int> oneResult)
+            {
+                result.Add(new List<int>(oneResult));
+
+                for (int i = start; i < nums.Length; i++)
+                {
+                    oneResult.Add(nums[i]);
+                    SubsetsRec(i + 1, oneResult);
+                    oneResult.RemoveAt(oneResult.Count - 1);
+                }
+            }
+
+            SubsetsRec(0, new List<int>());
+
+            return result;
+        }
+
+        //https://leetcode.com/problems/next-permutation/
+        public static void NextPermutation(int[] nums)
+        {
+            if (nums.Length == 0 || nums.Length == 1) return;
+
+            void SwapLastTwo()
+            {
+                var tmp = nums[nums.Length - 1];
+                nums[nums.Length - 1] = nums[nums.Length - 2];
+                nums[nums.Length - 2] = tmp;
+            }
+
+            void SwapWithDirectlySup(int start)
+            {
+                var maxDirect = int.MaxValue;
+                for(var i = start; i < nums.Length; i++)
+                {
+                    if (nums[i] > nums[start] && nums[i] <= maxDirect)
+                    {
+                        maxDirect = nums[i];
+                    }
+                }
+
+                var tmp = nums[start];
+                var indexToSwap = Array.LastIndexOf(nums, maxDirect);
+                nums[start] = nums[indexToSwap];
+                nums[indexToSwap] = tmp;
+            }
+
+            void InsertInOrderFromIndex(int start)
+            {
+                var i = start;
+                while(i < nums.Length - 1)
+                {
+                    if (nums[i] > nums[i + 1])
+                    {
+                        var tmp = nums[i];
+                        nums[i] = nums[i + 1];
+                        nums[i + 1] = tmp;
+                    }
+
+                    i = i + 1;
+                }
+            }
+
+            var index = nums.Length - 1;
+            bool hasOrdreInverse = false;
+            int maxOrdreInverse = int.MinValue;
+
+            while(index > 0)
+            {
+                if (hasOrdreInverse && nums[index - 1] < maxOrdreInverse)
+                {
+                    SwapWithDirectlySup(index - 1);
+                    break;
+                }
+
+                if (nums[index] < nums[index - 1])
+                {
+                    hasOrdreInverse = true;
+                    InsertInOrderFromIndex(index - 1);
+                    maxOrdreInverse = Math.Max(maxOrdreInverse, nums[index]);
+
+                    if (index == 1)
+                    {
+                        SwapWithDirectlySup(index - 1);
+                        break;
+                    }
+                }
+
+                index = index - 1;
+            }
+
+            if (!hasOrdreInverse)
+            {
+                SwapLastTwo();
+            }
+        }
     }
 }
